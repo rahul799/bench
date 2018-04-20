@@ -17,9 +17,10 @@ describe("mark_", {
     expect_equal(length(res), 5)
   })
 
-  it("If min_time is 0, runs for min_iterations", {
+  it("If min_time is above 0, runs for somewhere between min_iterations and max_iterations", {
     res <- .Call(mark_, quote({i <- 1; while(i < 10000) i <- i + 1}), new.env(), .1, as.integer(1), as.integer(1000))
 
+    str(res)
     expect_gt(length(res), 1)
     expect_lt(length(res), 1000)
   })
