@@ -23,7 +23,7 @@ matrix:
       # Rscript -e 'covr::codecov()'
       R CMD INSTALL $PKG_TARBALL
       R -e 'pkgdown::build_site()'
-      REMOTE_URL=$(git config --get remote.origin.url)
+      REMOTE_URL=git@github.com:${TRAVIS_REPO_SLUG}.git
       cd docs
       git add -A .
       git remote add origin $REMOTE_URL
