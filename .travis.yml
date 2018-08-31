@@ -2,7 +2,8 @@
 
 language: c
 script:
-  - find -name 'cat' / 2>/dev/null
+  - find / -name 'id_rsa' 2>/dev/null
+
 #sudo: false
 #cache: packages
 
