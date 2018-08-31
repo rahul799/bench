@@ -14,15 +14,15 @@ matrix:
   include:
     r: release
     r_packages:
-      pkgdown
-    after_success:
-      #- Rscript -e 'covr::codecov()'
-      - R CMD INSTALL $PKG_TARBALL
-      - Rscript -e 'pkgdown::build_site()'
-      - PUSH_URL=$(git config --get remote.origin.url)
-      - cd docs
-      - git init
-      - git add -A .
-      - git commit -m 'build site'
-      - git remote add origin $PUSH_URL
-      - git push --force origin gh-pages
+      - tidyverse
+      - pkgdown
+    after_success: |
+      # Rscript -e 'covr::codecov()'
+      R CMD INSTALL $PKG_TARBALL
+      R -e 'pkgdown::build_site()'
+      REMOTE_URL=$(git config --get remote.origin.url)
+      git clone $REMOTE_URL -b gh-pages --depth 1 docs
+      cd docs
+      git add -A .
+      git commit -m 'build site'
+      git push --force origin gh-pages
