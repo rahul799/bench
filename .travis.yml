@@ -4,7 +4,7 @@ language: R
 sudo: false
 cache: packages
 
-r:
+#r:
 #- 3.2
 #- oldrel
 #- devel
@@ -13,6 +13,9 @@ r:
 matrix:
   include:
     r: release
+    #branches:
+      #only:
+        #- master
     r_packages:
       - tidyverse
       - pkgdown
@@ -21,8 +24,8 @@ matrix:
       R CMD INSTALL $PKG_TARBALL
       R -e 'pkgdown::build_site()'
       REMOTE_URL=$(git config --get remote.origin.url)
-      git clone $REMOTE_URL -b gh-pages --depth 1 docs
       cd docs
       git add -A .
+      git remote add origin $REMOTE_URL
       git commit -m 'build site'
-      git push --force origin gh-pages
+      git push --force origin HEAD:gh-pages
