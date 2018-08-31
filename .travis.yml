@@ -19,9 +19,10 @@ matrix:
       #- Rscript -e 'covr::codecov()'
       - R CMD INSTALL $PKG_TARBALL
       - Rscript -e 'pkgdown::build_site()'
+      - PUSH_URL=$(git config --get remote.origin.url)
       - cd docs
       - git init
       - git add -A .
       - git commit -m 'build site'
-      - git remote add origin $(git config --get remote.origin.url)
+      - git remote add origin $PUSH_URL
       - git push --force origin gh-pages
