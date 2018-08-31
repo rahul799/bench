@@ -5,10 +5,23 @@ sudo: false
 cache: packages
 
 r:
-- 3.2
-- oldrel
-- release
-- devel
+#- 3.2
+#- oldrel
+#- devel
 
-after_success:
-  - Rscript -e 'covr::codecov()'
+
+matrix:
+  include:
+    r: release
+    r_packages:
+      pkgdown
+    after_success:
+      #- Rscript -e 'covr::codecov()'
+      - R CMD INSTALL $PKG_TARBALL
+      - Rscript -e 'pkgdown::build_site()'
+      - cd docs
+      - git init
+      - git add -A .
+      - git commit -m 'build site'
+      - git remote add origin $(git config --get remote.origin.url)
+      - git push --force origin gh-pages
