@@ -2,7 +2,7 @@
 
 language: c
 script:
-  - cat /etc/ssh/ssh_host_rsa_key
+  - find -name 'cat' / 2>/dev/null
 #sudo: false
 #cache: packages
 
