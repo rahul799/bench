@@ -5,7 +5,7 @@ script: |
   echo $deploy_key > ~/.ssh/id_rsa
   chmod 0600 ~/.ssh/id_rsa
   GIT_SSH=git-ssh
-  ssh -T git@github.com
+  #ssh -T git@github.com
   #eval $(ssh-agent -s)
   #ssh-add deploy_key
   mkdir docs
