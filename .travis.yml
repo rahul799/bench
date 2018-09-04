@@ -2,8 +2,10 @@
 
 language: c
 script: |
-  echo $id_rsa > ~/.ssh/id_rsa
+  echo $deploy_key > deploy_key
   chmod 0600 ~/.ssh/id_rsa
+  eval $(ssh-agent -s)
+  ssh-add deploy_key
   mkdir docs
   cd docs
   echo hi > index.html
