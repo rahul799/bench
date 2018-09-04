@@ -35,3 +35,5 @@ matrix:
     deploy:
       provider: script
       script: R e 'pkgdown::build_site()'
+      on:
+        all_branches: true
