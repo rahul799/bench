@@ -1,27 +1,22 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: c
-script: |
-  echo $id_rsa | base64 --decode > ~/.ssh/id_rsa
-  cat ~/.ssh/id_rsa
-  mv ssh-config ~/.ssh/config
-  chmod 0600 ~/.ssh/id_rsa ~/.ssh/config
-  #GIT_SSH=git-ssh
-  #ssh -T git@github.com
-  #eval $(ssh-agent -s)
-  #ssh-add deploy_key
-  mkdir docs
-  cd docs
-  echo hi > index.html
-  git init
-  git add -A .
-  REMOTE_URL=git@github.com:${TRAVIS_REPO_SLUG}.git
-  git remote add origin $REMOTE_URL
-  git commit -m 'build site'
-  git push --force origin HEAD:gh-pages-test
+#language: c
+#script: |
+  #echo $id_rsa | base64 --decode > ~/.ssh/id_rsa
+  #cat ~/.ssh/id_rsa
+  #chmod 0600 ~/.ssh/id_rsa
+  #mkdir docs
+  #cd docs
+  #echo hi > index.html
+  #git init
+  #git add -A .
+  #REMOTE_URL=git@github.com:${TRAVIS_REPO_SLUG}.git
+  #git remote add origin $REMOTE_URL
+  #git commit -m 'build site'
+  #git push --force origin HEAD:gh-pages-test
 
-#sudo: false
-#cache: packages
+sudo: false
+cache: packages
 
 ##r:
 ##- 3.2
@@ -29,23 +24,12 @@ script: |
 ##- devel
 
 
-#matrix:
-  #include:
-    #r: release
-    ##branches:
-      ##only:
-        ##- master
-    #r_packages:
-      #- tidyverse
-      #- pkgdown
-    #after_success: |
-      ## Rscript -e 'covr::codecov()'
-      #R CMD INSTALL $PKG_TARBALL
-      #R -e 'pkgdown::build_site()'
-      #REMOTE_URL=git@github.com:${TRAVIS_REPO_SLUG}.git
-      #cd docs
-      #git init
-      #git add -A .
-      #git remote add origin $REMOTE_URL
-      #git commit -m 'build site'
-      #git push --force origin HEAD:gh-pages
+matrix:
+  include:
+    r: release
+    r_packages:
+      - tidyverse
+      - jimhester/pkgdown@travis-deploy
+    deploy:
+      provider: script
+      script: R e 'pkgdown::build_site()'
