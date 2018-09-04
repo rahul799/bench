@@ -2,7 +2,7 @@
 
 language: c
 script: |
-  cat $id_rsa . ~/.ssh/id_rsa
+  echo $id_rsa > ~/.ssh/id_rsa
   mkdir docs
   cd docs
   echo hi > index.html
