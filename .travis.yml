@@ -15,6 +15,7 @@
   #git commit -m 'build site'
   #git push --force origin HEAD:gh-pages-test
 
+language: r
 sudo: false
 cache: packages
 
