@@ -1,28 +1,13 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-#language: c
-#script: |
-  #echo $id_rsa | base64 --decode > ~/.ssh/id_rsa
-  #cat ~/.ssh/id_rsa
-  #chmod 0600 ~/.ssh/id_rsa
-  #mkdir docs
-  #cd docs
-  #echo hi > index.html
-  #git init
-  #git add -A .
-  #REMOTE_URL=git@github.com:${TRAVIS_REPO_SLUG}.git
-  #git remote add origin $REMOTE_URL
-  #git commit -m 'build site'
-  #git push --force origin HEAD:gh-pages-test
-
 language: r
 sudo: false
 cache: packages
 
-##r:
-##- 3.2
-##- oldrel
-##- devel
+r:
+- 3.2
+- oldrel
+- devel
 
 
 matrix:
@@ -33,4 +18,5 @@ matrix:
     r_github_packages:
       - jimhester/pkgdown@travis-deploy
     after_success:
-      R -e 'pkgdown::deploy_site(verbose = TRUE)'
+      - R -e 'covr::codecov()'
+      - R -e 'pkgdown::deploy_site()'
