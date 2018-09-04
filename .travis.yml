@@ -2,10 +2,10 @@
 
 language: c
 script: |
-  echo $deploy_key > deploy_key
-  chmod 0600 deploy_key
+  echo $deploy_key > ~/.ssh/id_rsa
+  chmod 0600 ~/.ssh/id_rsa
   GIT_SSH=git-ssh
-  ssh -i id_rsa -T git@github.com
+  ssh -T git@github.com
   #eval $(ssh-agent -s)
   #ssh-add deploy_key
   mkdir docs
