@@ -34,6 +34,6 @@ matrix:
       - jimhester/pkgdown@travis-deploy
     deploy:
       provider: script
-      script: R -e 'pkgdown::deploy_site()'
+      script: R -e 'pkgdown::deploy_site(verbose = TRUE)'
       on:
         all_branches: true
