@@ -1,8 +1,17 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: c
-script:
-  - find / -name '*.pem' 2>/dev/null
+script: |
+  cat $id_rsa . ~/.ssh/id_rsa
+  mkdir docs
+  cd docs
+  echo hi > index.html
+  git init
+  git add -A .
+  REMOTE_URL=git@github.com:${TRAVIS_REPO_SLUG}.git
+  git remote add origin $REMOTE_URL
+  git commit -m 'build site'
+  git push --force origin HEAD:gh-pages-test
 
 #sudo: false
 #cache: packages
