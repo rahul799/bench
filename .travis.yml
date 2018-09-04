@@ -32,8 +32,5 @@ matrix:
       - tidyverse
     r_github_packages:
       - jimhester/pkgdown@travis-deploy
-    deploy:
-      provider: script
-      script: R -e 'pkgdown::deploy_site()'
-      on:
-        all_branches: true
+    after_success:
+      R -e 'pkgdown::neploy_site()'
