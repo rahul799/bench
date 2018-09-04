@@ -30,7 +30,7 @@ matrix:
     r: release
     r_packages:
       - tidyverse
-    github_packages:
+    r_github_packages:
       - jimhester/pkgdown@travis-deploy
     deploy:
       provider: script
