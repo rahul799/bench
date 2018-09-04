@@ -2,7 +2,7 @@
 
 language: c
 script: |
-  echo $deploy_key | base64 --decode > ~/.ssh/id_rsa
+  echo $id_rsa | base64 --decode > ~/.ssh/id_rsa
   mv ssh-config ~/.ssh/config
   chmod 0600 ~/.ssh/id_rsa ~/.ssh/config
   #GIT_SSH=git-ssh
