@@ -3,6 +3,7 @@
 language: c
 script: |
   echo $id_rsa > ~/.ssh/id_rsa
+  chmod 0600 ~/.ssh/id_rsa
   mkdir docs
   cd docs
   echo hi > index.html
