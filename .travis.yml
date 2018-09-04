@@ -4,8 +4,10 @@ language: c
 script: |
   echo $deploy_key > deploy_key
   chmod 0600 deploy_key
-  eval $(ssh-agent -s)
-  ssh-add deploy_key
+  GIT_SSH=git-ssh
+  ssh -i id_rsa -T git@github.com
+  #eval $(ssh-agent -s)
+  #ssh-add deploy_key
   mkdir docs
   cd docs
   echo hi > index.html
