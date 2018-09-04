@@ -1,0 +1,5 @@
+Host *
+  BatchMode=yes
+  StrictHostKeychecking=no
+  CheckHostIP=no
+  UserKnownHostsFile=/dev/null
