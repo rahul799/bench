@@ -33,4 +33,4 @@ matrix:
     r_github_packages:
       - jimhester/pkgdown@travis-deploy
     after_success:
-      R -e 'pkgdown::neploy_site()'
+      R -e 'pkgdown::deploy_site()'
