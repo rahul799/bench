@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ssh -o StrictHostKeychecking=no -o CheckHostIP=no -o UserKnownHostsFile=/dev/null -i deploy_key -- "$@"
+exec ssh -o StrictHostKeychecking=no -o CheckHostIP=no -o UserKnownHostsFile=/dev/null -o BatchMode=yes -i deploy_key -- "$@"
