@@ -91,9 +91,9 @@ bnch
 #> # A tibble: 3 x 10
 #>   expression                     min     mean   median      max `itr/sec` mem_alloc  n_gc n_itr total_time
 #>   <chr>                     <bch:tm> <bch:tm> <bch:tm> <bch:tm>     <dbl> <bch:byt> <dbl> <int>   <bch:tm>
-#> 1 dat[dat$x > 500, ]           306µs    361µs    327µs   1.23ms     2770.     416KB    48   989      357ms
-#> 2 dat[which(dat$x > 500), ]    231µs    288µs    258µs   1.29ms     3471.     357KB    54  1170      337ms
-#> 3 subset(dat, x > 500)         374µs    443µs    405µs   1.59ms     2257.     548KB    55   702      311ms
+#> 1 dat[dat$x > 500, ]           309µs    490µs    433µs   2.01ms     2040.     377KB     4   883      433ms
+#> 2 dat[which(dat$x > 500), ]    237µs    315µs    271µs   1.38ms     3171.     260KB     5  1354      427ms
+#> 3 subset(dat, x > 500)         390µs    542µs    464µs   2.06ms     1844.     509KB     6   766      415ms
 ```
 
 By default the summary uses absolute measures, however relative results
@@ -105,9 +105,9 @@ summary(bnch, relative = TRUE)
 #> # A tibble: 3 x 10
 #>   expression                  min  mean median   max `itr/sec` mem_alloc  n_gc n_itr total_time
 #>   <chr>                     <dbl> <dbl>  <dbl> <dbl>     <dbl>     <dbl> <dbl> <dbl>      <dbl>
-#> 1 dat[dat$x > 500, ]         1.32  1.25   1.27  1         1.23      1.16  1     1.41       1.15
-#> 2 dat[which(dat$x > 500), ]  1     1      1     1.05      1.54      1     1.12  1.67       1.08
-#> 3 subset(dat, x > 500)       1.62  1.54   1.57  1.30      1         1.53  1.15  1          1
+#> 1 dat[dat$x > 500, ]         1.31  1.55   1.60  1.46      1.11      1.45  1     1.15       1.04
+#> 2 dat[which(dat$x > 500), ]  1     1      1     1         1.72      1     1.25  1.77       1.03
+#> 3 subset(dat, x > 500)       1.65  1.72   1.72  1.49      1         1.96  1.5   1          1
 ```
 
 ### `bench::press()`
@@ -198,10 +198,10 @@ to
 ``` r
 bench::system_time({ i <- 1; while(i < 1e7) i <- i + 1 })
 #> process    real 
-#>   330ms   331ms
+#>   428ms   431ms
 bench::system_time(Sys.sleep(.5))
 #> process    real 
-#>    83µs   501ms
+#>    78µs   505ms
 ```
 
 ## Alternatives

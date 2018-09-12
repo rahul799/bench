@@ -4,8 +4,8 @@
 \alias{summary.bench_mark}
 \title{Summarize \link[bench:mark]{bench::mark} results.}
 \usage{
-\method{summary}{bench_mark}(object, filter_gc = TRUE, relative = FALSE,
-  ...)
+\method{summary}{bench_mark}(object, filter_gc = TRUE,
+  relative = FALSE, ...)
 }
 \arguments{
 \item{object}{\link{bench_mark} object to summarize.}
