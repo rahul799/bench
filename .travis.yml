@@ -6,21 +6,8 @@ cache: packages
 
 matrix:
   include:
-  - r: devel
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
-    before_cache: Rscript -e 'remotes::install_cran(c("pkgdown", "tidyverse"))'
-    deploy:
-      provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
-      skip_cleanup: true
-      on:
-        repo: r-lib/bench
-        condition: $TRAVIS_BRANCH = master || -n $TRAVIS_TAG
-  - r: oldrel
-  - r: 3.3
-  - r: 3.2
-  - r: release
-    name: "dev tidyr"
-    r_github_packages: tidyverse/tidyr
+    - Rscript -e 'remotes::install_cran(c("pkgdown", "tidyverse"))'
+    - Rscript -e 'pkgdown::build_site(verbose = TRUE)'
