@@ -27,7 +27,7 @@ process time is larger than the real time for fast expressions.
 }
 \examples{
 # This will use ~.5 seconds of real time, but very little process time.
-bench_time(Sys.sleep(.5))
+bench_time2(Sys.sleep(.5))
 }
 \seealso{
 \code{\link[=bench_memory]{bench_memory()}} To measure memory allocations for a given expression.
