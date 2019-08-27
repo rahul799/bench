@@ -8,6 +8,5 @@ matrix:
   include:
   - r: release
     after_success:
-    - Rscript -e 'covr::codecov()'
     - Rscript -e 'remotes::install_cran(c("pkgdown", "tidyverse"))'
-    - Rscript -e 'pkgdown::build_site(verbose = TRUE)'
+    - Rscript -e 'pkgdown::build_site()'
