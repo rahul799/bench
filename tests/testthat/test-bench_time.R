@@ -1,7 +1,7 @@
 describe("bench_time", {
   skip_on_cran()
 
-  res <- bench_time(1 + 1:1e7)
+  res <- bench_time2(1 + 1:1e7)
   it("returns process and real time", {
     expect_equal(names(res), c("process", "real"))
   })
@@ -12,7 +12,7 @@ describe("bench_time", {
   })
   it("returns times that are reasonable, system and real time are far apart
     for non-process bound expressions", {
-    res <- bench_time(Sys.sleep(.5))
+    res <- bench_time2(Sys.sleep(.5))
     epsilon <- abs(res[[1]] - res[[2]])
     expect_true((epsilon / res[[1]]) > 100)
   })

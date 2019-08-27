@@ -13,14 +13,14 @@
 #' @seealso [bench_memory()] To measure memory allocations for a given expression.
 #' @aliases system_time
 #' @export
-bench_time <- function(expr) {
+bench_time2 <- function(expr) {
   stats::setNames(
     as_bench_time(.Call(system_time_, substitute(expr), parent.frame())),
     c("process", "real"))
 }
 
 #' @export
-system_time <- bench_time
+system_time <- bench_time2
 
 #' Measure memory that an expression used.
 #'

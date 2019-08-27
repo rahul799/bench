@@ -17,7 +17,14 @@ allocations and garbage collections.
 
 ## Installation
 
-You can install the development version from
+You can install the release version from
+[CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("bench")
+```
+
+Or you can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -48,7 +55,7 @@ feel it has a number of advantages over [alternatives](#alternatives).
     2014](https://radfordneal.wordpress.com/2014/02/02/inaccurate-results-from-microbenchmark/)).
 
 The times and memory usage are returned as custom objects which have
-human readable formatting for display (e.g. `104ns`) and comparisons
+human readable formatting for display (e.g. `104ns`) and comparisons
 (e.g. `x$mem_alloc > "10MB"`).
 
 There is also full support for plotting with
@@ -94,9 +101,9 @@ bnch
 #> # A tibble: 3 x 6
 #>   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>                <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 dat[dat$x > 500, ]           408µs    491µs     1998.     377KB     0   
-#> 2 dat[which(dat$x > 500), ]    250µs    371µs     2798.     260KB     2.31
-#> 3 subset(dat, x > 500)         407µs    606µs     1750.     494KB     2.27
+#> 1 dat[dat$x > 500, ]           362us    392us     2365.     377KB     23.8
+#> 2 dat[which(dat$x > 500), ]    316us    355us     2628.     260KB     15.3
+#> 3 subset(dat, x > 500)         471us    525us     1867.     509KB     24.7
 ```
 
 By default the summary uses absolute measures, however relative results
@@ -108,9 +115,9 @@ summary(bnch, relative = TRUE)
 #> # A tibble: 3 x 6
 #>   expression                  min median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>                <dbl>  <dbl>     <dbl>     <dbl>    <dbl>
-#> 1 dat[dat$x > 500, ]         1.63   1.32      1.14      1.45      NaN
-#> 2 dat[which(dat$x > 500), ]  1      1         1.60      1         Inf
-#> 3 subset(dat, x > 500)       1.63   1.63      1         1.90      Inf
+#> 1 dat[dat$x > 500, ]         1.15   1.10      1.27      1.45     1.56
+#> 2 dat[which(dat$x > 500), ]  1      1         1.41      1        1   
+#> 3 subset(dat, x > 500)       1.49   1.48      1         1.96     1.62
 ```
 
 ### `bench::press()`
@@ -151,21 +158,21 @@ results <- bench::press(
 #> 3  1000    10
 #> 4 10000    10
 results
-#> # A tibble: 12 x 12
-#>    expression  rows  cols      min     mean   median      max `itr/sec` mem_alloc  n_gc n_itr total_time
-#>    <bch:expr> <dbl> <dbl> <bch:tm> <bch:tm> <bch:tm> <bch:tm>     <dbl> <bch:byt> <dbl> <int>   <bch:tm>
-#>  1 bracket     1000     2   32.5µs   44.2µs   38.6µs 952.96µs    22643.   15.84KB     4  9996      441ms
-#>  2 which       1000     2   32.4µs   39.2µs   37.3µs 547.92µs    25526.    7.91KB     5  9995      392ms
-#>  3 subset      1000     2   51.5µs   63.1µs   57.9µs 912.45µs    15838.    27.7KB     5  7034      444ms
-#>  4 bracket    10000     2   61.6µs   91.4µs   69.9µs  966.9µs    10943.  156.46KB    14  2991      273ms
-#>  5 which      10000     2     52µs   68.6µs   58.3µs   1.34ms    14575.   78.23KB    12  5533      380ms
-#>  6 subset     10000     2  101.9µs  144.9µs  115.7µs   1.11ms     6899.  273.79KB    18  2257      327ms
-#>  7 bracket     1000    10   73.7µs     92µs   82.2µs   1.03ms    10873.   47.52KB     6  4760      438ms
-#>  8 which       1000    10   66.5µs   78.8µs   73.5µs 915.93µs    12696.    7.91KB     7  5630      443ms
-#>  9 subset      1000    10   94.2µs    113µs  104.1µs 984.53µs     8849.   59.38KB     6  3826      432ms
-#> 10 bracket    10000    10  135.9µs  195.7µs  147.1µs   1.09ms     5110.   469.4KB    22  1510      296ms
-#> 11 which      10000    10   86.4µs  106.3µs     96µs   1.03ms     9406.   78.23KB     9  3921      417ms
-#> 12 subset     10000    10  175.7µs  263.7µs  199.8µs   1.18ms     3792.  586.73KB    20  1111      293ms
+#> # A tibble: 12 x 8
+#>    expression  rows  cols      min   median `itr/sec` mem_alloc `gc/sec`
+#>    <bch:expr> <dbl> <dbl> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+#>  1 bracket     1000     2   59.8us   77.8us    10603.   15.84KB     6.34
+#>  2 which       1000     2   59.1us  100.5us     9562.    7.91KB     6.63
+#>  3 subset      1000     2   93.6us  106.4us     7011.    27.7KB     6.26
+#>  4 bracket    10000     2  109.7us  126.9us     6345.  156.46KB    25.8 
+#>  5 which      10000     2   98.3us  111.9us     7527.   78.23KB    13.0 
+#>  6 subset     10000     2  175.4us  202.5us     4358.  273.79KB    30.5 
+#>  7 bracket     1000    10    128us  144.9us     6206.   47.52KB    12.9 
+#>  8 which       1000    10  121.8us  136.1us     6234.    7.91KB    10.7 
+#>  9 subset      1000    10    171us  191.2us     4381.   59.38KB     8.43
+#> 10 bracket    10000    10  228.9us  259.8us     3467.   469.4KB    42.9 
+#> 11 which      10000    10  159.2us  173.5us     5262.   78.23KB     8.32
+#> 12 subset     10000    10  289.8us  315.9us     2915.  586.73KB    37.2
 ```
 
 ## Plotting
@@ -189,7 +196,7 @@ working with the data directly.
 ``` r
 library(tidyverse)
 results %>%
-  unnest() %>%
+  unnest(cols = c(time, gc)) %>%
   filter(gc == "none") %>%
   mutate(expression = as.character(expression)) %>%
   ggplot(aes(x = mem_alloc, y = time, color = expression)) +
@@ -197,7 +204,7 @@ results %>%
     scale_color_bench_expr(scales::brewer_pal(type = "qual", palette = 3))
 ```
 
-<img src="man/figures/README-custom-plot-1.png" width="100%" />
+<img src="man/figures/README-custom-plot-new-1.png" width="100%" />
 
 ## `system_time()`
 
@@ -208,10 +215,10 @@ to
 ``` r
 bench::system_time({ i <- 1; while(i < 1e7) i <- i + 1 })
 #> process    real 
-#>   388ms   388ms
+#>   4.82s   4.92s
 bench::system_time(Sys.sleep(.5))
 #> process    real 
-#>   913µs   500ms
+#>       0   499ms
 ```
 
 ## Alternatives
