@@ -22,5 +22,5 @@ bench_process_memory <- function() {
   stats::setNames(
     as_bench_bytes(.Call(bench_process_memory_)),
     c("current", "max")
-  )
+      )
 }
